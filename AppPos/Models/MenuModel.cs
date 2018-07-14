@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace AppPos.Models
 {
@@ -14,5 +11,7 @@ namespace AppPos.Models
         public string Status { get; set; }
         public string Url { get; set; }
         public int UserId { get; set; }
+        public string Icon { get; set; }
+        public List<MenuModel> MenuChild { get; set; }
     }
 }

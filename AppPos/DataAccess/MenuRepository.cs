@@ -1,12 +1,13 @@
 ﻿using AppPos.Models;
 using Dapper;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace AppPos.DataAccess
 {
-    public class MenuRepository : BaseRepository, IMenu
+    public class MenuRepository : BaseRepository, IMenuRepository
     {
         public MenuRepository(IConnectionFactory _connection) : base(_connection)
         {
@@ -28,6 +29,21 @@ namespace AppPos.DataAccess
                     param: parameters,
                     commandType: CommandType.StoredProcedure);
                 return result.FirstOrDefault();
+            });
+        }
+
+        public async Task<IQueryable<MenuModel>> GetMenuList(int userId)
+        {
+            return await WithConnection(async q =>
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@userId", userId, DbType.Int32, ParameterDirection.Input);
+                var result = await q.QueryAsync<MenuModel>(
+                    sql: "[dbo].[spGetMenuList]",
+                    param: parameters,
+                    commandType: CommandType.StoredProcedure
+                    );
+                return result.AsQueryable();
             });
         }
     }

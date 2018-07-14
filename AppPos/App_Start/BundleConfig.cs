@@ -19,6 +19,10 @@ namespace AppPos
                         "~/Scripts/sb-admin-datatables.js",
                         "~/Scripts/sb-admin-charts.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/menu").Include(
+                "~/Scripts/menu.js"
+                ));
+
             // Utilice la versión de desarrollo de Modernizr para desarrollar y obtener información. De este modo, estará
             // para la producción, use la herramienta de compilación disponible en https://modernizr.com para seleccionar solo las pruebas que necesite.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
